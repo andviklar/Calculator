@@ -1,14 +1,18 @@
-version: "3"
+version: "3.2"
 services:
   calc_core:
     image: andviklar/calculator:calc_core
+    depends_on:
+      - rabbithost
     networks:
       - webnet
   calc_console:
     image: andviklar/calculator:calc_console
+    depends_on:
+      - rabbithost
     networks:
       - webnet
-  rabbit_node:
+  rabbithost:
     networks:
       - webnet
     hostname: rabbithost
@@ -21,3 +25,5 @@ services:
     tty: true
 networks:
   webnet:
+    driver: overlay
+    attachable: true
