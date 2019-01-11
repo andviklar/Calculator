@@ -1,0 +1,23 @@
+version: "3"
+services:
+  calc_core:
+    image: andviklar/calculator:calc_core
+    networks:
+      - webnet
+  calc_console:
+    image: andviklar/calculator:calc_console
+    networks:
+      - webnet
+  rabbit_node:
+    networks:
+      - webnet
+    hostname: rabbithost
+    image: "rabbitmq:3-management"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    labels:
+      NAME: "rabbithost"
+    tty: true
+networks:
+  webnet:
